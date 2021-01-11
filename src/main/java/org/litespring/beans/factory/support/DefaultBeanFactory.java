@@ -9,6 +9,7 @@ import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.BeanFactory;
+import org.litespring.beans.factory.config.ConfigurableBeanFactory;
 import org.litespring.util.ClassUtils;
 import org.omg.CORBA.TRANSACTION_MODE;
 
@@ -19,9 +20,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
-public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry {
+public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
+        implements BeanDefinitionRegistry, ConfigurableBeanFactory {
 
     private Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(64);
+
+    private ClassLoader beanClassLoader = null;
 
     public DefaultBeanFactory() {
     }
@@ -42,7 +46,19 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry {
         if (beanDefinition == null) {
             throw new BeanCreationException("Bean Definition does not exist");
         }
-        ClassLoader cl = ClassUtils.getDefaultClassLoader();
+        if (beanDefinition.isSingleton()) {
+            Object bean = super.getSingleton(beanId);
+            if (bean == null) {
+                bean = createBean(beanDefinition);
+                this.registerSingleton(beanId, bean);
+            }
+            return bean;
+        }
+        return createBean(beanDefinition);
+    }
+
+    private Object createBean(BeanDefinition beanDefinition) {
+        ClassLoader cl = this.getBeanClassLoader();
         String beanClassName = beanDefinition.getBeanClassName();
         try {
             Class<?> clz = cl.loadClass(beanClassName);
@@ -50,5 +66,15 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry {
         } catch (Exception e) {
             throw new BeanCreationException("Create bean for " + beanClassName + " failed", e);
         }
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        this.beanClassLoader = classLoader;
+    }
+
+    @Override
+    public ClassLoader getBeanClassLoader() {
+        return this.beanClassLoader != null ? this.beanClassLoader : ClassUtils.getDefaultClassLoader();
     }
 }

@@ -28,9 +28,23 @@ public class BeanFactoryTest {
         Resource resource = new ClassPathResource("petstore-v1.xml");
         reader.loadBeanDefinitions(resource);
         BeanDefinition beanDefinition = factory.getBeanDefinition("petStore");
+        Assert.assertTrue(beanDefinition.isSingleton());
+        Assert.assertFalse(beanDefinition.isPrototype());
+        Assert.assertEquals(BeanDefinition.SCOPE_DEFAULT, beanDefinition.getScope());
+
         Assert.assertEquals("org.litespring.service.v1.PetStoreService", beanDefinition.getBeanClassName());
         PetStoreService petStoreService = (PetStoreService) factory.getBean("petStore");
         Assert.assertNotNull(petStoreService);
+    }
+
+    @Test
+    public void testGetBeanScope() {
+        Resource resource = new ClassPathResource("petstore-v1.xml");
+        reader.loadBeanDefinitions(resource);
+        BeanDefinition beanDefinition = factory.getBeanDefinition("petStore1");
+        Assert.assertFalse(beanDefinition.isSingleton());
+        Assert.assertTrue(beanDefinition.isPrototype());
+        Assert.assertEquals(BeanDefinition.SCOPE_PROTOTYPE, beanDefinition.getScope());
     }
 
     @Test
