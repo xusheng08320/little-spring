@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
-public class XmlBeanDefinitionReader {
+public class XMLBeanDefinitionReader {
     public static final String ID_ATTRIBUTE = "id";
 
     public static final String CLASS_ATTRIBUTE = "class";
@@ -24,7 +24,7 @@ public class XmlBeanDefinitionReader {
 
     private BeanDefinitionRegistry registry;
 
-    public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
+    public XMLBeanDefinitionReader(BeanDefinitionRegistry registry) {
         this.registry = registry;
     }
 
