@@ -1,12 +1,15 @@
 package org.litespring.beans.factory.support;
 
 import com.sun.xml.internal.ws.api.message.stream.InputStreamMessage;
+import org.apache.commons.beanutils.BeanUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.litespring.beans.BeanDefinition;
 import org.litespring.beans.PropertyValue;
+import org.litespring.beans.SimpleTypeConverter;
+import org.litespring.beans.TypeConverter;
 import org.litespring.beans.factory.BeanCreationException;
 import org.litespring.beans.factory.BeanDefinitionStoreException;
 import org.litespring.beans.factory.BeanFactory;
@@ -69,6 +72,24 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
         return bean;
     }
 
+    private void populateBeanUseCommonBeanUtils(BeanDefinition beanDefinition, Object bean) {
+        List<PropertyValue> pvs = beanDefinition.getPropertyValues();
+        if (pvs == null || pvs.isEmpty()) {
+            return;
+        }
+        BeanDefinitionValueResolver resolver = new BeanDefinitionValueResolver(this);
+        try {
+            for (PropertyValue pv : pvs) {
+                String propertyName = pv.getName();
+                Object originValue = pv.getValue();
+                Object resolvedValue = resolver.resolveValueIfNecessary(originValue);
+                BeanUtils.copyProperty(bean, propertyName, resolvedValue);
+            }
+        } catch (Exception e) {
+            throw new BeanCreationException("Failed to obtain BeanInfo for class [" + beanDefinition.getBeanClassName() + "]", e);
+        }
+    }
+
     private void populateBean(BeanDefinition beanDefinition, Object bean) {
         List<PropertyValue> pvs = beanDefinition.getPropertyValues();
         if (pvs == null || pvs.isEmpty()) {
@@ -82,9 +103,11 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
                 Object resolvedValue = resolver.resolveValueIfNecessary(originValue);
                 BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
                 PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+                TypeConverter typeConverter = new SimpleTypeConverter();
                 for (PropertyDescriptor pd : pds) {
                     if (pd.getName().equals(propertyName)) {
-                        pd.getWriteMethod().invoke(bean, resolvedValue);
+                        Object valueConvertered = typeConverter.convertIfNecessary(resolvedValue, pd.getPropertyType());
+                        pd.getWriteMethod().invoke(bean, valueConvertered);
                         break;
                     }
                 }

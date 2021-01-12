@@ -8,7 +8,7 @@ import org.litespring.dao.v2.AccountDao;
 import org.litespring.dao.v2.ItemDao;
 import org.litespring.service.v2.PetStoreService;
 
-public class ApplicationContextV2 {
+public class ApplicationContextTestV2 {
 
     @Test
     public void testGetBean() {
@@ -19,5 +19,6 @@ public class ApplicationContextV2 {
         Assert.assertTrue(petStoreService.getAccountDao() instanceof AccountDao);
         Assert.assertTrue(petStoreService.getItemDao() instanceof ItemDao);
         Assert.assertEquals("xusheng", petStoreService.getOwner());
+        Assert.assertEquals(1, petStoreService.getVersion());
     }
 }
