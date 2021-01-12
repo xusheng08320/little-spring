@@ -14,7 +14,7 @@ public class BeanDefinitionValueResolver {
     public Object resolveValueIfNecessary(Object value) {
         if (value instanceof RuntimeBeanReference) {
             RuntimeBeanReference ref = (RuntimeBeanReference) value;
-            Object bean = this.factory.getBean(ref.getBeanName());
+            Object bean = this.factory.getBean(ref.getBeanId());
             return bean;
         }
         if (value instanceof TypedStringValue) {

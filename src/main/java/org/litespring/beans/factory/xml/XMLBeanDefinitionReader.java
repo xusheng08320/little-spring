@@ -48,7 +48,6 @@ public class XMLBeanDefinitionReader {
     public void loadBeanDefinitions(Resource resource) {
         InputStream is = null;
         try {
-            ClassLoader cl = ClassUtils.getDefaultClassLoader();
             is = resource.getInputStream();
             SAXReader reader = new SAXReader();
             Document doc = reader.read(is);
