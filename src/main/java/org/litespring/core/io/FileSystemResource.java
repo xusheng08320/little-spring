@@ -2,16 +2,20 @@ package org.litespring.core.io;
 
 import org.litespring.util.ClassUtils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class FileSystemResource implements Resource {
 
-    private String path;
+    private final String path;
+    private final File file;
+
+    public FileSystemResource(File file) {
+        this.file = file;
+        this.path = file.getPath();
+    }
 
     public FileSystemResource(String path) {
+        this.file = new File(path);
         this.path = path;
     }
 

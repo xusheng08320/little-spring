@@ -23,6 +23,18 @@ public class GenericBeanDefinition implements BeanDefinition {
         this.beanClassName = beanClassName;
     }
 
+    public GenericBeanDefinition() {
+
+    }
+
+    public void setBeanClassName(String className){
+        this.beanClassName = className;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public boolean isSingleton() {
         return this.singleton;
