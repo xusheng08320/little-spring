@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageTracker {
-    private static List<String> TRACKER_MESSAGES = new ArrayList<>();
-
-    public static void addMsg(String msg) {
-        TRACKER_MESSAGES.add(msg);
-    }
-
-    public static void clearMsgs() {
-        TRACKER_MESSAGES.clear();
-    }
-
-    public static List<String> getMsgs() {
-        return TRACKER_MESSAGES;
-    }
+	
+	private static List<String> MESSAGES = new ArrayList<String>();
+	
+	public static void addMsg(String msg){
+		MESSAGES.add(msg);
+	}
+	public static void clearMsgs(){
+		MESSAGES.clear();
+	}
+	public static List<String> getMsgs(){
+		return MESSAGES;
+	}
 }

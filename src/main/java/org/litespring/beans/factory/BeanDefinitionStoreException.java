@@ -4,7 +4,12 @@ import org.litespring.beans.BeansException;
 
 public class BeanDefinitionStoreException extends BeansException {
 
-    public BeanDefinitionStoreException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public BeanDefinitionStoreException(String msg, Throwable cause) {
+		super(msg, cause);
+		
+	}
+	public BeanDefinitionStoreException(String msg) {
+		super(msg);
+}
+	
 }

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface Resource {
-
-    InputStream getInputStream() throws IOException;
-
-    String getDescription();
+	public InputStream getInputStream() throws IOException;
+	public String getDescription();
 }

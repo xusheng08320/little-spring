@@ -1,12 +1,17 @@
 package org.litespring.test.v5;
 
 
+import java.lang.reflect.Method;
+
 import org.junit.Test;
 import org.litespring.service.v5.PetStoreService;
 import org.litespring.tx.TransactionManager;
-import org.springframework.cglib.proxy.*;
-
-import java.lang.reflect.Method;
+import org.springframework.cglib.proxy.Callback;
+import org.springframework.cglib.proxy.CallbackFilter;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.cglib.proxy.NoOp;
 
 public class CGLibTest {
 	

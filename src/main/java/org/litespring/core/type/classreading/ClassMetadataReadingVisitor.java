@@ -7,6 +7,7 @@ import org.springframework.asm.Opcodes;
 import org.springframework.asm.SpringAsmInfo;
 
 
+
 public class ClassMetadataReadingVisitor extends ClassVisitor implements ClassMetadata {
 
 	private String className;
@@ -27,7 +28,7 @@ public class ClassMetadataReadingVisitor extends ClassVisitor implements ClassMe
 		super(SpringAsmInfo.ASM_VERSION);
 	}
 
-	@Override
+
 	public void visit(int version, int access, String name, String signature, String supername, String[] interfaces) {
 		this.className = ClassUtils.convertResourcePathToClassName(name);
 		this.isInterface = ((access & Opcodes.ACC_INTERFACE) != 0);

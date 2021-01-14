@@ -1,5 +1,9 @@
 package org.litespring.context.annotation;
 
+import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.litespring.beans.BeanDefinition;
@@ -12,10 +16,6 @@ import org.litespring.core.type.classreading.MetadataReader;
 import org.litespring.core.type.classreading.SimpleMetadataReader;
 import org.litespring.stereotype.Component;
 import org.litespring.util.StringUtils;
-
-import java.io.IOException;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class ClassPathBeanDefinitionScanner {
 	
@@ -41,7 +41,7 @@ public class ClassPathBeanDefinitionScanner {
 			Set<BeanDefinition> candidates = findCandidateComponents(basePackage);
 			for (BeanDefinition candidate : candidates) {
 				beanDefinitions.add(candidate);
-				registry.registryBeanDefinition(candidate.getID(),candidate);
+				registry.registerBeanDefinition(candidate.getID(),candidate);
 				
 			}
 		}
@@ -75,7 +75,7 @@ public class ClassPathBeanDefinitionScanner {
 				
 			}
 		}
-		catch (Exception ex) {
+		catch (IOException ex) {
 			throw new BeanDefinitionStoreException("I/O failure during classpath scanning", ex);
 		}
 		return candidates;

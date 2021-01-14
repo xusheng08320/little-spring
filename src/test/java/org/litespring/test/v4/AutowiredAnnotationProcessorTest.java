@@ -1,8 +1,11 @@
 package org.litespring.test.v4;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
+import org.litespring.beans.factory.annotation.AutowiredAnnotationProcessor;
 import org.junit.Assert;
 import org.junit.Test;
-import org.litespring.beans.factory.annotation.AutowiredAnnotationProcessor;
 import org.litespring.beans.factory.annotation.AutowiredFieldElement;
 import org.litespring.beans.factory.annotation.InjectionElement;
 import org.litespring.beans.factory.annotation.InjectionMetadata;
@@ -12,8 +15,6 @@ import org.litespring.dao.v4.AccountDao;
 import org.litespring.dao.v4.ItemDao;
 import org.litespring.service.v4.PetStoreService;
 
-import java.lang.reflect.Field;
-import java.util.List;
 
 
 public class AutowiredAnnotationProcessorTest {

@@ -1,12 +1,10 @@
 package org.litespring.beans;
 
-public class BeansException extends RuntimeException{
+public class BeansException extends RuntimeException {
+	public BeansException(String msg) {
+		super(msg);	}
 
-    public BeansException(String message) {
-        super(message);
-    }
-
-    public BeansException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public BeansException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 }

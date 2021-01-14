@@ -1,12 +1,14 @@
 package org.litespring.aop.config;
 
-import org.litespring.beans.BeanUtils;
-import org.litespring.beans.factory.BeanFactory;
-import org.litespring.util.StringUtils;
-
 import java.lang.reflect.Method;
 
-public class MethodLocatingFactory {
+import org.litespring.beans.BeanUtils;
+import org.litespring.beans.factory.BeanFactory;
+import org.litespring.beans.factory.BeanFactoryAware;
+import org.litespring.beans.factory.FactoryBean;
+import org.litespring.util.StringUtils;
+
+public class MethodLocatingFactory  implements FactoryBean<Method>,BeanFactoryAware{
 	
 	private String targetBeanName;
 
@@ -48,6 +50,9 @@ public class MethodLocatingFactory {
 
 	public Method getObject() throws Exception {
 		return this.method;
+	}
+	public Class<?> getObjectType() {
+		return Method.class;
 	}
 
 }

@@ -3,6 +3,6 @@ package org.litespring.beans.factory.support;
 import org.litespring.beans.BeanDefinition;
 
 public interface BeanDefinitionRegistry {
-    BeanDefinition getBeanDefinition(String beanId);
-    void registryBeanDefinition(String beanId, BeanDefinition beanDefinition);
+	BeanDefinition getBeanDefinition(String beanID);
+	void registerBeanDefinition(String beanID, BeanDefinition bd);
 }

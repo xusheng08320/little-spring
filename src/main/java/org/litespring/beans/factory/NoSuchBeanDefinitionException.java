@@ -4,6 +4,7 @@ import org.litespring.beans.BeansException;
 import org.litespring.util.StringUtils;
 
 
+
 public class NoSuchBeanDefinitionException extends BeansException {
 
 	/** Name of the missing bean */

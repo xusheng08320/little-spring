@@ -4,4 +4,5 @@ import org.litespring.stereotype.Component;
 
 @Component
 public class AccountDao {
+
 }

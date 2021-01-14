@@ -1,13 +1,5 @@
 package org.litespring.beans.factory.annotation;
 
-import org.litespring.beans.BeansException;
-import org.litespring.beans.factory.AutowiredCapableBeanFactory;
-import org.litespring.beans.factory.BeanCreationException;
-import org.litespring.beans.factory.config.Autowired;
-import org.litespring.beans.factory.config.InstantiationAwareBeanPostProcessor;
-import org.litespring.core.annotation.AnnotationUtils;
-import org.litespring.util.ReflectionUtils;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
@@ -17,10 +9,17 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import org.litespring.beans.BeansException;
+import org.litespring.beans.factory.BeanCreationException;
+import org.litespring.beans.factory.config.AutowireCapableBeanFactory;
+import org.litespring.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.litespring.core.annotation.AnnotationUtils;
+import org.litespring.util.ReflectionUtils;
+
 
 public class AutowiredAnnotationProcessor implements InstantiationAwareBeanPostProcessor  {
 	
-	private AutowiredCapableBeanFactory beanFactory;
+	private AutowireCapableBeanFactory beanFactory;
 	private String requiredParameterName = "required";
 	private boolean requiredParameterValue = true;
 	
@@ -86,7 +85,7 @@ public class AutowiredAnnotationProcessor implements InstantiationAwareBeanPostP
 		}
 		return null;
 	}
-	public void setBeanFactory(AutowiredCapableBeanFactory beanFactory){
+	public void setBeanFactory(AutowireCapableBeanFactory beanFactory){
 		this.beanFactory = beanFactory;
 	}
 	public Object beforeInitialization(Object bean, String beanName) throws BeansException {

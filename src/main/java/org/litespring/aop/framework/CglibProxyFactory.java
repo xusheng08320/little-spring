@@ -17,19 +17,24 @@ package org.litespring.aop.framework;
  */
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.litespring.aop.Advice;
-import org.litespring.util.Assert;
-import org.springframework.cglib.core.CodeGenerationException;
-import org.springframework.cglib.core.SpringNamingPolicy;
-import org.springframework.cglib.proxy.*;
-
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.litespring.aop.Advice;
+import org.litespring.aop.AopInvocationException;
+import org.litespring.util.Assert;
+import org.springframework.cglib.core.CodeGenerationException;
+import org.springframework.cglib.core.SpringNamingPolicy;
+import org.springframework.cglib.proxy.Callback;
+import org.springframework.cglib.proxy.CallbackFilter;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
 
 
 /**

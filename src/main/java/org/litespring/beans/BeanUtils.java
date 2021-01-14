@@ -1,8 +1,9 @@
 package org.litespring.beans;
 
+import java.lang.reflect.Method;
+
 import org.litespring.util.StringUtils;
 
-import java.lang.reflect.Method;
 
 
 /**

@@ -1,12 +1,12 @@
 package org.litespring.core.annotation;
 
 
-import org.litespring.util.Assert;
+import static java.lang.String.format;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static java.lang.String.format;
+import org.litespring.util.Assert;
 
 
 @SuppressWarnings("serial")

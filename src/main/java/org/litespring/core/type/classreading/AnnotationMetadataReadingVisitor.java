@@ -1,15 +1,14 @@
 package org.litespring.core.type.classreading;
 
-import org.litespring.core.annotation.AnnotationAttributes;
-import org.litespring.core.type.AnnotationMetadata;
-import org.springframework.asm.AnnotationVisitor;
-import org.springframework.asm.Attribute;
-import org.springframework.asm.Type;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.litespring.core.annotation.AnnotationAttributes;
+import org.litespring.core.type.AnnotationMetadata;
+import org.springframework.asm.AnnotationVisitor;
+import org.springframework.asm.Type;
 
 public class AnnotationMetadataReadingVisitor extends ClassMetadataReadingVisitor implements  AnnotationMetadata {
 	
@@ -26,8 +25,6 @@ public class AnnotationMetadataReadingVisitor extends ClassMetadataReadingVisito
 		this.annotationSet.add(className);
 		return new AnnotationAttributesReadingVisitor(className, this.attributeMap);
 	}
-
-
 	public Set<String> getAnnotationTypes() {
 		return this.annotationSet;
 	}
